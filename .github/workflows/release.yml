@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build .alfredworkflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install bundled dependencies into lib/
+        run: python -m pip install --target=lib --upgrade alfred-pyworkflow
+
+      - name: Build ConfluenceSearch.alfredworkflow bundle
+        run: |
+          zip -r ConfluenceSearch.alfredworkflow . \
+            -x '*.git*' '.github/*' '.github' \
+               'prefs.plist' '*.DS_Store' \
+               '*__pycache__*' '*.pyc' \
+               'invoke.log' 'ConfluenceSearch.alfredworkflow'
+          unzip -l ConfluenceSearch.alfredworkflow | head -20
+          ls -lh ConfluenceSearch.alfredworkflow
+
+      - name: Create GitHub release with the bundle attached
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            ConfluenceSearch.alfredworkflow \
+            --generate-notes \
+            --title "$GITHUB_REF_NAME"
