@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.jasonwheeler.alfred-confluence-plugin</string>
+	<key>connections</key>
+	<dict>
+		<key>3DDBF921-F4D6-4266-9CC8-B6E8DF7FC78B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>47D8B3C3-D5AD-4EE0-91EA-9FB1468B866B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Jason Wheeler</string>
+	<key>description</key>
+	<string>Search Confluence Cloud from Alfred, scoped to your configured spaces. Press Return to open a result in your default browser.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Confluence Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>cf</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching Confluence…</string>
+				<key>script</key>
+				<string>PYTHONPATH=./lib /usr/bin/python3 ./confluence_search.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enter search text…</string>
+				<key>title</key>
+				<string>Confluence Search</string>
+				<key>type</key>
+				<integer>5</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3DDBF921-F4D6-4266-9CC8-B6E8DF7FC78B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<true/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>47D8B3C3-D5AD-4EE0-91EA-9FB1468B866B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Confluence Search
+
+Search your Atlassian Cloud Confluence instance from Alfred, scoped to a configurable list of spaces.
+
+## Setup
+
+1. Generate an Atlassian API token at https://id.atlassian.com/manage-profile/security/api-tokens
+2. Click the `[x]` icon at the top-right of this workflow and fill in:
+   - **Confluence base URL** — e.g. `https://yourcompany.atlassian.net`
+   - **Atlassian email** — the email on your Atlassian account
+   - **API token** — the token you just generated
+   - **Space keys** — comma-separated, e.g. `DOCS,ENG,HR`. Leave blank to search all spaces you can see.
+3. Open Alfred and type `cf` followed by a search term. Press Return on a result to open it in your browser.
+</string>
+	<key>uidata</key>
+	<dict>
+		<key>3DDBF921-F4D6-4266-9CC8-B6E8DF7FC78B</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>47D8B3C3-D5AD-4EE0-91EA-9FB1468B866B</key>
+		<dict>
+			<key>xpos</key>
+			<real>245</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>https://yourcompany.atlassian.net</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The URL of your Atlassian Cloud site, without a trailing slash.</string>
+			<key>label</key>
+			<string>Confluence base URL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>CONFLUENCE_BASE_URL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>name@example.com</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Email address of your Atlassian ID account.</string>
+			<key>label</key>
+			<string>Atlassian email</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>CONFLUENCE_EMAIL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>ATATT3xFfGF0…</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Generate at https://id.atlassian.com/manage-profile/security/api-tokens</string>
+			<key>label</key>
+			<string>API token</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>CONFLUENCE_API_TOKEN</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>DOCS,ENG,HR</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Comma-separated list of Confluence space keys to search within. Leave blank to search all spaces you can access.</string>
+			<key>label</key>
+			<string>Space keys</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>CONFLUENCE_SPACE_KEYS</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array>
+		<string>CONFLUENCE_API_TOKEN</string>
+		<string>CONFLUENCE_EMAIL</string>
+		<string>CONFLUENCE_BASE_URL</string>
+		<string>CONFLUENCE_SPACE_KEYS</string>
+	</array>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
