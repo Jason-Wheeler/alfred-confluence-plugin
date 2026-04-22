@@ -22,7 +22,7 @@ Quit and relaunch Alfred. The workflow appears in Alfred Preferences → Workflo
 1. Generate an Atlassian API token at <https://id.atlassian.com/manage-profile/security/api-tokens>.
 2. In Alfred Preferences → Workflows → **Confluence Search**, click the `[x]` icon top-right to open the configuration sheet.
 3. Fill in:
-   - **Confluence base URL** — e.g. `https://ef.atlassian.net` (no trailing slash).
+   - **Confluence base URL** — e.g. `https://yourcompany.atlassian.net` (no trailing slash).
    - **Atlassian email** — the email on your Atlassian account.
    - **API token** — the token from step 1.
    - **Space keys** — comma-separated, e.g. `DOCS,ENG,HR`. Leave blank to search every space you can see.
@@ -62,8 +62,8 @@ rm -rf lib/workflow lib/Alfred_PyWorkflow-*.dist-info
 Useful for debugging HTTP errors — Alfred swallows stderr by default.
 
 ```sh
-CONFLUENCE_BASE_URL='https://ef.atlassian.net' \
-CONFLUENCE_EMAIL='jason.wheeler@ef.com' \
+CONFLUENCE_BASE_URL='https://yourcompany.atlassian.net' \
+CONFLUENCE_EMAIL='you@example.com' \
 CONFLUENCE_API_TOKEN='<token>' \
 CONFLUENCE_SPACE_KEYS='DOCS' \
 PYTHONPATH=./lib /usr/bin/python3 ./confluence_search.py 'onboarding' | python3 -m json.tool

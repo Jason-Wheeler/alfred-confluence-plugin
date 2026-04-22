@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  syntax:
+    name: syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: py_compile confluence_search.py
+        run: python -m py_compile confluence_search.py
+
+      - name: Validate info.plist is parseable
+        run: python -c "import plistlib; plistlib.load(open('info.plist','rb'))"
